@@ -22,5 +22,5 @@ context('Setup Process', () => {
         cy.get('.service_li').should('have.length', 4)
         cy.get('.card').should('have.length', 4)
     })
-
+    
 });
