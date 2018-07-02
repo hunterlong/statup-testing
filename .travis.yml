@@ -12,4 +12,5 @@ install:
   - npm ci
 script:
   - docker run -it -d -p 8080:8080 -v `pwd`/statup:/app hunterlong/statup
+  - sleep 15
   - $(npm bin)/cypress run --record --key $CYPRESS_KEY
