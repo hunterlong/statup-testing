@@ -1,3 +1,10 @@
 {
-  "projectId": "bi8mhr"
+  "projectId": "bi8mhr",
+  "env": {
+    "DB_HOST": "localhost",
+    "DB_USER": "travis",
+    "DB_DATABASE": "test",
+    "DB_PORT": "5432",
+    "DB_PASS": ""
+  }
 }

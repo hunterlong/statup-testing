@@ -6,9 +6,13 @@
   "dependencies": {
     "cypress": "^3.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "start-server-and-test": "^1.5.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "curl -I -X GET http://localhost:8080/test",
+    "cy:run": "cypress run --record --key $CYPRESS_KEY",
+    "test": "start-server-and-test start http://localhost:8080/test cy:run"
   },
   "author": "",
   "license": "ISC"
