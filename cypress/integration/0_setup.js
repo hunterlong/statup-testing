@@ -18,8 +18,8 @@ context('Setup Process', () => {
 
         cy.wait(5000)
 
-        cy.get('.header-title').should('contain', 'Demo')
-        cy.get('.header-desc').should('contain', 'This is an awesome page')
+        cy.get('.header-title').should('contain', 'Demo Tester')
+        cy.get('.header-desc').should('contain', 'This is a test from Crypress!')
 
     })
 
