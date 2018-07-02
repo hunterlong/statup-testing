@@ -3,11 +3,11 @@ node_js:
   - 10
 env:
   global:
-     - DB_HOST=localhost
-     - DB_USER=travis
-     - DB_PASS=
-     - DB_DATABASE=test
-     - GO_ENV=test
+     - CYPRESS_DB_HOST=localhost
+     - CYPRESS_DB_USER=travis
+     - CYPRESS_DB_PASS=
+     - CYPRESS_DB_DATABASE=test
+     - CYPRESS_GO_ENV=test
 
 sudo: required
 services:
