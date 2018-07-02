@@ -1,15 +1,28 @@
 language: node_js
 node_js:
   - 10
+env:
+  global:
+     - VERSION=0.28.5
+     - DB_HOST=localhost
+     - DB_USER=travis
+     - DB_PASS=
+     - DB_DATABASE=test
+     - GO_ENV=test
+
 sudo: required
 services:
   - docker
+  - postgresql
 cache:
   directories:
     - ~/.npm
     - ~/.cache
 install:
   - npm ci
+before_script:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+  - psql -c 'create database test;' -U postgres
 script:
   - docker run -it -d -p 8080:8080 -v `pwd`/statup:/app hunterlong/statup
   - sleep 15
