@@ -28,7 +28,6 @@ before_script:
   - psql -c 'create database test;' -U postgres
   - docker pull hunterlong/statup
 script:
-  - docker run -it -d -p 8080:8080 --ipc=host --add-host=travisbox:travisbox hunterlong/statup
-  - sleep 30
-  - docker ps
+  - docker run -it -d -p 8080:8080 --add-host=travisbox:travisbox hunterlong/statup
+  - sleep 10
   - npm run test
