@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - 10
+sudo: required
+services:
+  - docker
+cache:
+  directories:
+    - ~/.npm
+    - ~/.cache
+install:
+  - npm ci
+script:
+  - docker run -it -d -p 8080:8080 -v `pwd`/statup:/app hunterlong/statup
+  - $(npm bin)/cypress run --record --key $CYPRESS_KEY
