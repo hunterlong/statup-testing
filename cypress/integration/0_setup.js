@@ -2,6 +2,7 @@ context('Setup Process', () => {
 
     it('should go to setup page', () => {
         cy.visit('http://localhost:8080')
+        cy.get('select[name=db_connection]').select('postgres')
         cy.get('input[name="db_host"]').clear().type(Cypress.env('DB_HOST'))
         cy.get('input[name="db_port"]').clear().type('5432')
         cy.get('input[name="db_user"]').clear().type(Cypress.env('DB_USER'))
@@ -16,7 +17,6 @@ context('Setup Process', () => {
         cy.get('input[name="password"]').clear().type('admin')
         cy.scrollTo('bottom')
         cy.get('#setup_button').click()
-        cy.wait(5000)
         cy.get('.header-title').should('contain', 'Demo Tester')
         cy.get('.header-desc').should('contain', 'This is a test from Crypress!')
         cy.scrollTo('bottom')
@@ -24,4 +24,4 @@ context('Setup Process', () => {
         cy.get('.card').should('have.length', 4)
     })
 
-});
+})
