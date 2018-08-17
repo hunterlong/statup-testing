@@ -10,7 +10,7 @@ context('Dashboard Forms', () => {
 
     it('should view services', () => {
         cy.visit('http://localhost:8080/services')
-        cy.get('tr').should('have.length', 5)
+        cy.get('tr').should('have.length', 6)
         cy.title().should('eq', 'Statup | Services')
     })
 
@@ -21,14 +21,14 @@ context('Dashboard Forms', () => {
         cy.get('input[name="interval"]').type('30')
         cy.get('form').submit()
         cy.title().should('eq', 'Statup | Services')
-        cy.get('tr').should('have.length', 6)
+        cy.get('tr').should('have.length', 7)
     })
 
     it('should delete a service', () => {
         cy.visit('http://localhost:8080/services')
         cy.get(':nth-child(5) > .text-right > .btn-group > .btn-danger').click()
         cy.title().should('eq', 'Statup | Services')
-        cy.get('tr').should('have.length', 5)
+        cy.get('tr').should('have.length', 6)
     })
 
     it('should view users', () => {
@@ -49,8 +49,15 @@ context('Dashboard Forms', () => {
 
     it('should delete a user', () => {
         cy.visit('http://localhost:8080/users')
-        cy.get(':nth-child(2) > .text-right > .btn-group > .btn').click()
+        cy.get('#user_2 > .btn-group > .btn-danger').click()
         cy.get('tr').should('have.length', 2)
+    })
+
+    it('should view help', () => {
+        cy.visit('http://localhost:8080/settings')
+        cy.get(':nth-child(6) > .nav-link').click()
+        cy.title().should('eq', 'Statup | Help')
+        cy.get('.col-12 > :nth-child(1)').should('contain', 'Statup')
     })
 
 });

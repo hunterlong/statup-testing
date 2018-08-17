@@ -7,5 +7,6 @@
     "DB_PORT": "5432",
     "DB_PASS": "password123",
     "GO_ENV": "production"
-  }
+  },
+  "chromeWebSecurity": false
 }

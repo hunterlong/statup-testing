@@ -10,6 +10,7 @@ env:
      - CYPRESS_DB_PASS=
      - CYPRESS_DB_DATABASE=test
      - CYPRESS_DB_PORT=5432
+     - CYPRESS_TRAVIS=yes
      - VERSION=0.44
 
 sudo: required

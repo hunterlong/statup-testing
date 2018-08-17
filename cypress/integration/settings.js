@@ -12,40 +12,20 @@ context('Settings Forms', () => {
         cy.get('input[name="project"]').clear().type('Project Updated')
         cy.get('input[name="description"]').clear().type('This is an awesome page')
         cy.get('input[name="domain"]').clear().type('http://0.0.0.0:8080')
+        cy.get('textarea[name="footer"]').clear().type('This is a custom footer')
         cy.get('#v-pills-home > form').submit()
         cy.title().should('eq', 'Statup | Settings')
         cy.get('input[name="project"]').should('have.value', 'Project Updated')
         cy.get('input[name="description"]').should('have.value', 'This is an awesome page')
         cy.get('input[name="domain"]').should('have.value', 'http://0.0.0.0:8080')
+        cy.get('.footer').should('contain', 'This is a custom footer')
     })
 
-
-    it('should edit email settings', () => {
+    it('should view logs', () => {
         cy.visit('http://localhost:8080/settings')
-        cy.get('#v-pills-email-tab').click()
+        cy.get(':nth-child(5) > .nav-link').click()
         cy.wait(500)
-        cy.get('input[name="host"]').clear().type('smtp.server.com')
-        cy.get('input[name="username"]').clear().type('smtpusername')
-        cy.get('input[name="password"]').clear().type('smtppassword')
-        cy.get('input[name="port"]').clear().type('587')
-        cy.get('input[name="address"]').clear().type('info@socialeck.com')
-        cy.get('#v-pills-email > form').submit()
-        cy.title().should('eq', 'Statup | Settings')
-        cy.get('#v-pills-email-tab').click()
-        cy.wait(500)
-        cy.get('input[name="host"]').should('have.value', 'smtp.server.com')
-    })
-
-    it('should edit slack settings', () => {
-        cy.visit('http://localhost:8080/settings')
-        cy.get('#v-pills-slack-tab').click()
-        cy.wait(500)
-        cy.get('input[name="slack_url"]').clear().type('https://webhook.slack.com')
-        cy.get('#v-pills-slack > form').submit()
-        cy.title().should('eq', 'Statup | Settings')
-        cy.get('#v-pills-slack-tab').click()
-        cy.wait(500)
-        cy.get('input[name="slack_url"]').should('have.value', 'https://webhook.slack.com')
+        cy.get('#live_logs').should('contain', '/logs (GET)')
     })
 
 
