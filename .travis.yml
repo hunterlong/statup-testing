@@ -32,8 +32,8 @@ before_script:
   - sudo mv statup /usr/local/bin/statup
 script:
   - statup version
-  - cd $HOME && statup &&
-  - sleep 15
+  - cd $HOME && statup > /dev/null &
+  - sleep 10
   - npm run test
 after_success:
   - echo "awesome! now push to Docker hub for the Latest image!"
