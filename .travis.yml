@@ -24,8 +24,10 @@ before_script:
   - ifconfig
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
   - psql -c 'create database test;' -U postgres
-  - docker pull hunterlong/statup
+  - docker pull hunterlong/statup:dev
 script:
-  - docker run -it -d -p 8080:8080 --network host hunterlong/statup
-  - sleep 10
+  - docker run -it -d -p 8080:8080 --network host hunterlong/statup:dev
+  - sleep 15
   - npm run test
+after_success:
+  - echo "awesome! now push to Docker hub for the Latest image!"
