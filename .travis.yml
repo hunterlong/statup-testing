@@ -8,6 +8,7 @@ env:
      - CYPRESS_DB_PASS=
      - CYPRESS_DB_DATABASE=test
      - CYPRESS_DB_PORT=5432
+     - VERSION=0.29.1
 
 sudo: required
 services:
@@ -24,10 +25,8 @@ before_script:
   - ifconfig
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
   - psql -c 'create database test;' -U postgres
-  - docker pull hunterlong/statup:dev
+  - docker pull hunterlong/statup:v$VERSION
 script:
-  - docker run -it -d -p 8080:8080 --network host hunterlong/statup:dev
-  - sleep 15
+  - docker run -it -d -p 8080:8080 --network host hunterlong/statup:v$VERSION
+  - sleep 10
   - npm run test
-after_success:
-  - echo "awesome! now push to Docker hub for the Latest image!"
