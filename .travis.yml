@@ -29,7 +29,7 @@ before_script:
   - wget -q https://github.com/hunterlong/statup/releases/download/v$VERSION/statup-linux-x64.tar.gz
   - tar -xvzf statup-linux-x64.tar.gz
   - chmod +x statup
-  - mv statup /usr/local/bin/statup
+  - sudo mv statup /usr/local/bin/statup
 script:
   - statup version
   - cd $HOME && statup &&
