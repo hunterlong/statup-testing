@@ -1,3 +1,5 @@
+os:
+  - linux
 language: node_js
 node_js:
   - 10
@@ -8,11 +10,10 @@ env:
      - CYPRESS_DB_PASS=
      - CYPRESS_DB_DATABASE=test
      - CYPRESS_DB_PORT=5432
-     - VERSION=0.29.1
+     - VERSION=0.44
 
 sudo: required
 services:
-  - docker
   - postgresql
   - mysql
 cache:
@@ -25,8 +26,14 @@ before_script:
   - ifconfig
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
   - psql -c 'create database test;' -U postgres
-  - docker pull hunterlong/statup:v$VERSION
+  - wget -q https://github.com/hunterlong/statup/releases/download/v$VERSION/statup-linux-x64.tar.gz
+  - tar -xvzf statup-linux-x64.tar.gz
+  - chmod +x statup
+  - mv statup /usr/local/bin/statup
 script:
-  - docker run -it -d -p 8080:8080 --network host hunterlong/statup:v$VERSION
-  - sleep 10
+  - statup version
+  - cd $HOME && statup &&
+  - sleep 15
   - npm run test
+after_success:
+  - echo "awesome! now push to Docker hub for the Latest image!"
